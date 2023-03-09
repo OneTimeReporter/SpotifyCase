@@ -49,7 +49,7 @@ if navigatie == "Hoofdpagina":
     st.subheader("Team 5: Nora Ruijpers, Sam van Doorn, Stijn Maat, Tarik Kiliç")
     st.image(spot_image, caption= "Spotify")
 
-    st.write("Welkom bij de blog. Het internet geeft toegang tot een onvoorstelbaar hoeveelheid data; data een data analist kan gebruiken om analyse uit te voeren")
+    st.write("Welkom bij de blog. Het internet geeft toegang tot een onvoorstelbaar hoeveelheid data; data dat een data analist kan gebruiken om analyse uit te voeren")
     st.write("Met de behulp van APIs, kan deze data aangeroepen worden. In deze blog is er analyse uitgevoerd op data van de volgende bronnen:")
     st.markdown("- De Spotify API")
     st.markdown("- De Charts API op Kaggle")
@@ -125,8 +125,18 @@ if navigatie == "Data Verzameling":
     Na het filteren van de in totaal 600 albums is er een lijst van ongeveer 280 artiesten overgebleven. Een stuk minder dan de miljoenen artiesten op Spotify, maar wel groot genoeg om interessante analyse mee uit te voeren.  
     ''')
     
-    
-
+     st.header("[De Kaggle Dataset: Spotify Charts](https://www.kaggle.com/datasets/dhruvildave/spotify-charts)")
+     st.write(''' 
+     Met behulp van de Kaggle API, hebben wij een dataset aangeroepen dat data bevat over Spotify Charts. Uit deze dataset hebben wij onder andere
+     ''')
+     st.markdown('''
+     - **Landen**: Land waar de chart word afgespeeld
+     - **Viral 50 en Viral 100**: Positie in playlist
+     - **Release Dates**: Release datum
+     - **Rank**: Positie in de chart
+     - **State of track**: Positieverandering ten opzichte van andere tracks in de chart
+     ''')
+     st.write("Deze datapunten zijn combineerd met de andere datapunten op basis van artiest en nummer om onze visualisaties te weergeven en onze dataset te verbreden.")
 
 # In[6]:
 
@@ -296,29 +306,6 @@ if navigatie == "Plot 2: Kaartenplot":
         st.write('Please select a valid option.')
     
     
-    
-    
-    
-    #Code voor de tweede plot
-    
-
-    # Assuming the data is stored in a DataFrame called 'df_process'
-    #grouped_data = df_process.groupby('country')['artist_popularity'].mean().reset_index()
-    #grouped_data2 = df_process.groupby('country')['track_popularity'].mean().reset_index()
-    #options = st.sidebar.radio("Select:" ,("Average Popularity of Artists by Country","Average Popularity of Tracks by Country"))
-    #def plot(options):
-     #   if options == "Average Popularity of Artists by Country":
-      #      fig = px.choropleth(grouped_data, locations='country', locationmode='country names',
-       #                         color='artist_popularity', range_color=[85, 90], 
-        #                        color_continuous_scale='viridis',
-         #                       title='Average Popularity of Artists by Country')
-       # if options == "Average Popularity of Tracks by Country":
-        #    fig = px.choropleth(grouped_data2, locations='country', locationmode='country names',
-         #                       color='track_popularity', range_color=[73, 80], 
-          #                      color_continuous_scale='viridis',
-           #                     title='Average Popularity of Tracks by Country')
-        #return fig
-    #st.plotly_chart(fig)
 
 if navigatie == "Plot 3: Histogram":
     #Code voor de dittes
@@ -342,33 +329,13 @@ if navigatie == "Plot 3: Histogram":
     colors = plt.cm.Set2(range(len(genres_counts)))
     for i, (genre, count) in enumerate(genres_counts.iteritems()):
         if genre in selected_genres:
-            ax.hist(count, bins=20, color=colors[i], label=genre)
-    ax.set_xlabel("Frequency")
-    ax.set_ylabel("Number of Genres")
+            ax.hist(count, bins=20, color=colors[i], label=genre, orientation='horizontal')
+    ax.set_ylabel("Frequency")
+    ax.set_xlabel("Number of Genres")
     ax.set_title("Distribution of Selected Artist Genres")
     ax.legend()
     st.pyplot(fig)
 
-#     # Define genre options and default selection
-#     genre_options = ['pop', 'chicagorap', 'dancepop', 'atlhiphop', 'barbadianpop', 'detroithiphop', 'artpop', 'canadianpop', 'canadiancontemporaryr&b', 'kpop', 'conscioushiphop', 'bigroom', 'canadianhiphop', 'colombianpop', 'reggaeton']
-#     default_genres = ['pop', 'dancepop']
-
-#     # Create checkbox for genre selection
-#     selected_genres = st.sidebar.multiselect('Select Genres', genre_options, default=default_genres)
-
-#     # Filter data by selected genres
-#     df_filtered = df_process[df_process['artist_genres'].str.contains('|'.join(selected_genres))]
-
-#     # Extract artist genres and count frequency
-#     genres_counts = df_filtered['artist_genres'].str.split(';').explode().value_counts()
-
-#     # Create histogram using Matplotlib
-#     fig, ax = plt.subplots()
-#     ax.hist(genres_counts, bins=20)
-#     ax.set_xlabel("Frequency")
-#     ax.set_ylabel("Number of Genres")
-#     ax.set_title("Distribution of Selected Artist Genres")
-#     st.pyplot(fig)
 
 if navigatie == "Plot 4: Subplot":
     #Code voor de dattes
