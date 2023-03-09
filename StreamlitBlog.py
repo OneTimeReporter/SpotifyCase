@@ -464,19 +464,18 @@ if navigatie == "Recommendations":
         for i, song in enumerate(recommendations):
             st.write(f'{i+1}. {song[0]} - {song[1]}')
 
-    st.write('''Voor het maken van deze aplicatie zijn de volgende handelingen getroffen.   
-    Als eerst is het functie 'pairwise_distances' geinstalleerd vanuit de package scikit-learn.    
-    Deze functie wordt meestal gebruikt om bewerkingen toe te passen bij matrixen en arrays.   
-    Om gebruik hiervan te maken worden de volgende acties ondernomen. 
-    Als eerste wordt er een gebruik gemaakt van een kleiner dataframe dat is gebasseerd op de top 100 van de voorgaande dataset.    
-    Daarna zijn alle NaN values verwijderd uit het dataframe en is de reset_index gebruikt om een new dataframe te maken.  
-    Als tweede is er de functie 'get_song_recommendations' om 10 verschillende songs terug te geven aan de gebruiker die overeenkomen met het door de gebruiker opgegeven nummer.   
-    
-    
-    
-    
-    
-    
+    st.write('''Voor het maken van deze aplicatie zijn de volgende handelingen getroffen.  
+Als eerst is het functie 'pairwise_distances' geinstalleerd vanuit de package scikit-learn.    
+Deze functie wordt meestal gebruikt om bewerkingen toe te passen bij matrixen en arrays.    
+Om gebruik hiervan te maken worden de volgende acties ondernomen.    
+Als eerste wordt er een gebruik gemaakt van een kleiner dataframe dat is gebasseerd op de top 100 van de voorgaande dataset.    
+Daarna zijn alle NaN values verwijderd uit het dataframe en is de reset_index gebruikt om een new dataframe te maken.    
+Als tweede is er de functie 'get_song_recommendations' om 10 verschillende songs terug te geven aan de gebruiker die overeenkomen met het door de gebruiker opgegeven nummer.    
+Die pakt dan twee argumenten, de naam van de track en de teruggave van andere nummers.   
+Daarna wordt door het eerste argument de features van de track gepakt en worden deze opgeslagen in de "song_features".   
+En wordt de afstand berekent door gebruik te maken van he Euclidean distance voor het verkrijgen van vergelijkbare nummers en wordt het nummers zelf buitengesloten van de teruggave van tracks.   
+Euclidean distance is een van de meest gebruikte machine learning algoritms en is afgeleid van de stelling van pythagoras.   
+"In een rechthoekige driehoek is de som van de kwadraten van de basis en de loodlijn gelijk aan het kwadraat van de schuine zijde."   
      ''')
 
     import subprocess
