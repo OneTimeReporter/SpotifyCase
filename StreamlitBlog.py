@@ -118,6 +118,7 @@ if navigatie == "Data Verzameling":
         ''')
     
     st.header("[De Chart2000 dataset](https://chart2000.com/)")
+    
     st.write('''
     Er zijn miljoenen artiesten op Spotify. Het zou enorm onpraktisch zijn om analyse uit te voeren op elke artiest op de platform.  Daarom is er met behulp van Chart2000 
     een lijst gemaakt met artiesten die gebruikt zullen worden in de analyse. Van de website zijn de top 200 albums van het jaar 2000, 2010, en 2020 opgehaald. Deze data is gecombineerd, en gefilterd om een lijst met artiesten te krijgen.  
@@ -125,18 +126,18 @@ if navigatie == "Data Verzameling":
     Na het filteren van de in totaal 600 albums is er een lijst van ongeveer 280 artiesten overgebleven. Een stuk minder dan de miljoenen artiesten op Spotify, maar wel groot genoeg om interessante analyse mee uit te voeren.  
     ''')
     
-     st.header("[De Kaggle Dataset: Spotify Charts](https://www.kaggle.com/datasets/dhruvildave/spotify-charts)")
-     st.write(''' 
-     Met behulp van de Kaggle API, hebben wij een dataset aangeroepen dat data bevat over Spotify Charts. Uit deze dataset hebben wij onder andere
-     ''')
-     st.markdown('''
-     - **Landen**: Land waar de chart word afgespeeld
-     - **Viral 50 en Viral 100**: Positie in playlist
-     - **Release Dates**: Release datum
-     - **Rank**: Positie in de chart
-     - **State of track**: Positieverandering ten opzichte van andere tracks in de chart
-     ''')
-     st.write("Deze datapunten zijn combineerd met de andere datapunten op basis van artiest en nummer om onze visualisaties te weergeven en onze dataset te verbreden.")
+    st.header("[De Kaggle Dataset: Spotify Charts](https://www.kaggle.com/datasets/dhruvildave/spotify-charts)")
+    st.write(''' 
+    Met behulp van de Kaggle API, hebben wij een dataset aangeroepen dat data bevat over Spotify Charts. Uit deze dataset hebben wij onder andere
+    ''')
+    st.markdown('''
+    - **Landen**: Land waar de chart word afgespeeld
+    - **Viral 50 en Viral 100**: Positie in playlist
+    - **Release Dates**: Release datum
+    - **Rank**: Positie in de chart
+    - **State of track**: Positieverandering ten opzichte van andere tracks in de chart
+    ''')
+    st.write("Deze datapunten zijn combineerd met de andere datapunten op basis van artiest en nummer om onze visualisaties te weergeven en onze dataset te verbreden.")
 
 # In[6]:
 
