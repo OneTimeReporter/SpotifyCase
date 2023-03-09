@@ -347,8 +347,8 @@ if navigatie == "Plot 5: Scatterplot":
     
     fig = px.scatter(df_spotipy, x= 'artist_popularity', y = 'artist_followers', color = 'artist_name', size = 'artist_followers')
     fig.update_layout(title="Popularity over Followers",xaxis= dict(title = "Popularity Score [0-100]"))
-
-    fig.show()
+    st.pyplot(fig)
+    #fig.show()
     
     #fig, ax = plt.subplots()
     #ax.scatter(df_process['position'], df_process['chart_trend'], alpha=0.5)
