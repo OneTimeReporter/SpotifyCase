@@ -344,6 +344,7 @@ if navigatie == "Plot 5: Scatterplot":
     #Code voor de dit dan maar
     st.title("Plot 5: Scatterplot - song streams vs tempo")
     df_spotify = pd.read_csv('smaller_dataset.csv')
+    
     fig = px.scatter(df_spotify, x= 'artist_popularity', y = 'artist_followers', color = 'artist_name', size = 'artist_followers')
     fig.update_layout(title="Popularity over Followers",xaxis= dict(title = "Popularity Score [0-100]"))
 
@@ -354,7 +355,7 @@ if navigatie == "Plot 5: Scatterplot":
     #ax.set_xlabel("Position")
     #ax.set_ylabel("Chart_trend")
     #ax.set_title("Correlation between Position and Chart Trend")
-    #st.pyplot(fig)
+    st.pyplot(fig)
     
 if navigatie == "Recommendations":
     #Code voor de recommendations
