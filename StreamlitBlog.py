@@ -270,8 +270,7 @@ if navigatie == "Plot 2: Kaartenplot":
                                 color_continuous_scale='viridis',
                                 title='Average Popularity of Tracks by Country')
         st.plotly_chart(fig)
-
-
+    plot(True)
 
 if navigatie == "Plot 3: Histogram":
     #Code voor de dittes
