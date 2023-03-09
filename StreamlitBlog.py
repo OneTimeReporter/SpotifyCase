@@ -257,14 +257,14 @@ if navigatie == "Plot 2: Kaartenplot":
     # Assuming the data is stored in a DataFrame called 'df_process'
     grouped_data = df_process.groupby('country')['artist_popularity'].mean().reset_index()
     grouped_data2 = df_process.groupby('country')['track_popularity'].mean().reset_index()
-
-    def plot(radio):
-        if radio == "Average Popularity of Artists by Country":
+    options = st.sidebar.radio("Select:" ,("Average Popularity of Artists by Country","Average Popularity of Tracks by Country"))
+    def plot(options):
+        if options == "Average Popularity of Artists by Country":
             fig = px.choropleth(grouped_data, locations='country', locationmode='country names',
                                 color='artist_popularity', range_color=[85, 90], 
                                 color_continuous_scale='viridis',
                                 title='Average Popularity of Artists by Country')
-        if radio == "Average Popularity of Tracks by Country":
+        if options == "Average Popularity of Tracks by Country":
             fig = px.choropleth(grouped_data2, locations='country', locationmode='country names',
                                 color='track_popularity', range_color=[73, 80], 
                                 color_continuous_scale='viridis',
