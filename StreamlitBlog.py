@@ -449,18 +449,20 @@ if navigatie == "Recommendations":
         # Get the track names of the recommended songs
         recommendations = df_smaller.iloc[indices][['artist_name', 'track_name']].values.tolist()
         return recommendations
+    st.title("Song Recommender")
 
-    song_input = st.text_input("Enter your song")
+# Select a song using a dropdown menu
+    song_input = st.selectbox("Enter your song", options=df_smaller['track_name'].unique())
     st.markdown(f"Your input is: {song_input}")
 
-    # Example usage
+# Generate and display song recommendations based on the selected song
     if song_input:
         original_song = df_smaller[df_smaller['track_name'] == song_input].iloc[0]
         artist_name = original_song['artist_name']
-        recommendations = get_song_recommendations(song_input, N=10)
-        st.write(f'Song recommendations for "{song_input} - {artist_name}":')
+         recommendations = get_song_recommendations(song_input, N=10)
+         st.write(f'Song recommendations for "{song_input} - {artist_name}":')
         for i, song in enumerate(recommendations):
-            st.write(f'{i+1}. {song}')
+            st.write(f'{i+1}. {song[0]} - {song[1]}')
 
     st.write('''Voor het maken van deze aplicatie zijn de volgende handelingen getroffen.   
     Als eerst is het functie 'pairwise_distances' geinstalleerd vanuit de package scikit-learn.    
