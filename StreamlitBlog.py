@@ -17,7 +17,7 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 from sklearn.metrics import pairwise_distances
 import seaborn as sns
-
+df_spotipy = pd.read_csv('smaller_dataset.csv')
 # In[2]:
 
 
@@ -343,12 +343,10 @@ if navigatie == "Plot 4: Subplot":
 if navigatie == "Plot 5: Scatterplot":
     #Code voor de dit dan maar
     st.title("Plot 5: Scatterplot - song streams vs tempo")
-    df_spotipy = pd.read_csv('smaller_dataset.csv')
     
     fig = px.scatter(df_spotipy, x= 'artist_popularity', y = 'artist_followers', color = 'artist_name', size = 'artist_followers')
     fig.update_layout(title="Popularity over Followers",xaxis= dict(title = "Popularity Score [0-100]"))
-    st.pyplot(fig)
-    #fig.show()
+    fig.show()
     
     #fig, ax = plt.subplots()
     #ax.scatter(df_process['position'], df_process['chart_trend'], alpha=0.5)
