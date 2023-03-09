@@ -351,7 +351,7 @@ if navigatie == "Plot 5: Scatterplot":
     
     #fig, ax = plt.subplots()
     #ax.scatter(df_process['position'], df_process['chart_trend'], alpha=0.5)
-    3ax.set_xlabel("Position")
+    #ax.set_xlabel("Position")
     #ax.set_ylabel("Chart_trend")
     #ax.set_title("Correlation between Position and Chart Trend")
     #st.pyplot(fig)
