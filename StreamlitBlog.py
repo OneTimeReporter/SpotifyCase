@@ -306,7 +306,7 @@ if navigatie == "Plot 2: Kaartenplot":
     else:
         st.write('Please select a valid option.')
     
-    st.write('''  st.title("Plot 2: [Kaartenplot, Average Popularity of Tracks by Country ]")
+    code = '''  st.title("Plot 2: [Kaartenplot, Average Popularity of Tracks by Country ]")
     
     # Group the data by country and calculate the mean popularity for artists and tracks
     grouped_data = df_process.groupby('country')['artist_popularity'].mean().reset_index()
@@ -348,8 +348,8 @@ if navigatie == "Plot 2: Kaartenplot":
         plot(checkbox_1, checkbox_2, artist_selectbox)
     else:
         st.write('Please select a valid option.')
-    ''')
-    
+    '''
+    st.code(code, language='python')
 
 if navigatie == "Plot 3: Histogram":
     #Code voor de dittes
