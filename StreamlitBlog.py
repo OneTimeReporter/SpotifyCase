@@ -306,6 +306,49 @@ if navigatie == "Plot 2: Kaartenplot":
     else:
         st.write('Please select a valid option.')
     
+    st.write('''  st.title("Plot 2: [Kaartenplot, Average Popularity of Tracks by Country ]")
+    
+    # Group the data by country and calculate the mean popularity for artists and tracks
+    grouped_data = df_process.groupby('country')['artist_popularity'].mean().reset_index()
+    grouped_data1 = df_process.groupby('country')['track_popularity'].mean().reset_index()
+    grouped_data2 = df_process.groupby('country')[['artist_name','artist_popularity']].mean().reset_index()
+    grouped_data3 = df_process.groupby('country')[['track_name','track_popularity']].mean().reset_index()
+
+    # Define a function to plot choropleth maps based on user selection
+    def plot(checkbox_1, checkbox_2, artist_selectbox):
+        fig = go.Figure()
+    
+        if checkbox_1:
+            fig.add_trace(px.choropleth(grouped_data, locations='country', locationmode='country names',
+                                    color='artist_popularity', range_color=[85, 90],
+                                    color_continuous_scale='viridis',
+                                    title='Average Popularity of Artists by Country').data[0])
+        if checkbox_2:
+            fig.add_trace(px.choropleth(grouped_data1, locations='country', locationmode='country names',
+                                    color='track_popularity', range_color=[73, 80],
+                                    color_continuous_scale='viridis',
+                                    title='Average Popularity of Tracks by Country').data[0])
+    
+        if artist_selectbox:
+            filtered_data = df_process[df_process['artist_name']==artist_selectbox].groupby('country')['track_popularity'].mean().reset_index()
+            fig.add_trace(px.choropleth(filtered_data, locations='country', locationmode='country names',
+                                    color='track_popularity', range_color=[73, 80],
+                                    color_continuous_scale='viridis',
+                                    title=f'Average Popularity of Tracks by {artist_selectbox} by Country').data[0])
+    
+        st.plotly_chart(fig)
+
+    # Define sidebar widgets for user selection
+    checkbox_1 = st.sidebar.checkbox('Average Popularity of Artists by Country', key='checkbox_1')
+    checkbox_2 = st.sidebar.checkbox('Average Popularity of Tracks by Country', key='checkbox_2')
+    artist_selectbox = st.sidebar.selectbox("Select an artist to display", options=df_process["artist_name"].unique())
+
+    # Call the plot function based on user selection
+    if checkbox_1 or checkbox_2 or artist_selectbox:
+        plot(checkbox_1, checkbox_2, artist_selectbox)
+    else:
+        st.write('Please select a valid option.')
+    ''')
     
 
 if navigatie == "Plot 3: Histogram":
