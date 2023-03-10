@@ -474,7 +474,7 @@ if navigatie == "Recommendations":
         st.write(f'Song recommendations for "{song_input} - {artist_name}":')
         for i, song in enumerate(recommendations):
             st.write(f'{i+1}. {song[0]} - {song[1]}')
-
+            
     st.write('''Voor het maken van deze aplicatie zijn de volgende handelingen getroffen.  
 Als eerst is het functie 'pairwise_distances' geinstalleerd vanuit de package scikit-learn.    
 Deze functie wordt meestal gebruikt om bewerkingen toe te passen bij matrixen en arrays.    
@@ -489,6 +489,65 @@ Euclidean distance is een van de meest gebruikte machine learning algoritms en i
 "In een rechthoekige driehoek is de som van de kwadraten van de basis en de loodlijn gelijk aan het kwadraat van de schuine zijde."   
      ''')
 
+     code = ''' st.title("Recommendations")
+    st.write('''Het gebruik van deze functie gaat als volgt:     
+    Door een track van de dataset in te vullen wordt er een prediction gemaakt voor welke nummers vergelijkbaar zijn met dit nummer.     
+    Hou er rekening mee dat deze applicatie hoofdlettergevoelig is en dat de titel compleet moet zijn voor een goede voorspelling.   
+    ''')
+    # Load the smaller Spotify dataset
+    df_spotify = pd.read_csv('smaller_dataset.csv')
+
+    # Select only the columns that you want to keep in the smaller dataset
+    columns_to_keep = ['artist_name', 'track_name', 'danceability', 'energy', 'loudness', 'speechiness', 'acousticness',
+                    'instrumentalness', 'liveness', 'valence', 'tempo']
+
+    # Create the smaller dataset by selecting only the rows and columns that you want to keep
+    df_smaller = df_spotify[columns_to_keep].copy()
+
+    # Remove any rows with missing values
+    df_smaller.dropna(inplace=True)
+
+    # Reset the index of the dataframe
+    df_smaller.reset_index(drop=True, inplace=True)
+
+    # Define a function to get song recommendations
+    def get_song_recommendations(song_name, N=10):
+        
+        # Get the song features for the given song name
+        song = df_smaller[df_smaller['track_name'] == song_name].iloc[0]
+        song_features = song[['danceability', 'energy', 'loudness', 'speechiness', 'acousticness',
+                             'instrumentalness', 'liveness', 'valence', 'tempo']].values.reshape(1, -1)
+
+        # Calculate the distance between the given song and all other songs in the dataset
+        distances = pairwise_distances(df_smaller[['danceability', 'energy', 'loudness', 'speechiness', 'acousticness',
+                                                 'instrumentalness', 'liveness', 'valence', 'tempo']].values,
+                                       song_features,
+                                       metric='euclidean').flatten()
+
+        # Get the indices of the N songs with the smallest distance, excluding the index of the given song
+        song_index = df_smaller[df_smaller['track_name'] == song_name].index[0]
+        indices = distances.argsort()[1:N+1]
+        indices = [i for i in indices if i != song_index]
+
+        # Get the track names of the recommended songs
+        recommendations = df_smaller.iloc[indices][['artist_name', 'track_name']].values.tolist()
+        return recommendations
+    st.title("Song Recommender")
+
+# Select a song using a dropdown menu
+    song_input = st.selectbox("Enter your song", options=df_smaller['track_name'].unique())
+    st.markdown(f"Your input is: {song_input}")
+
+# Generate and display song recommendations based on the selected song
+    if song_input:
+        original_song = df_smaller[df_smaller['track_name'] == song_input].iloc[0]
+        artist_name = original_song['artist_name']
+        recommendations = get_song_recommendations(song_input, N=10)
+        st.write(f'Song recommendations for "{song_input} - {artist_name}":')
+        for i, song in enumerate(recommendations):
+            st.write(f'{i+1}. {song[0]} - {song[1]}')
+    '''
+    st.code(code, language='python')
     import subprocess
 
     # Get the list of installed packages
