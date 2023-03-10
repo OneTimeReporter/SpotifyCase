@@ -489,7 +489,7 @@ Euclidean distance is een van de meest gebruikte machine learning algoritms en i
 "In een rechthoekige driehoek is de som van de kwadraten van de basis en de loodlijn gelijk aan het kwadraat van de schuine zijde."   
      ''')
 
-     code = ''' st.title("Recommendations")
+    code = ''' st.title("Recommendations")
     st.write('''Het gebruik van deze functie gaat als volgt:     
     Door een track van de dataset in te vullen wordt er een prediction gemaakt voor welke nummers vergelijkbaar zijn met dit nummer.     
     Hou er rekening mee dat deze applicatie hoofdlettergevoelig is en dat de titel compleet moet zijn voor een goede voorspelling.   
