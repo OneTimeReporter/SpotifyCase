@@ -141,9 +141,6 @@ if navigatie == "Data Verzameling":
 
 # In[6]:
 
-
-# df_charts = pd.read_csv("charts.csv")
-# df_artiestenlijst = pd.read_csv("artiestenlijst.csv")
 df_process=pd.read_csv("smaller_dataset.csv")
 
 
