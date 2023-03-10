@@ -164,7 +164,7 @@ if navigatie == "Data Verkenning":
     #zet voor nu gewoon een dummy
     
     code =  '''
-    client_credentials_manager = SpotifyClientCredentials(client_id= 'b064af7b89834329b471d4bbdf8e0cc3', client_secret='a336186c0ae94f319b53dd2fa42c95fc')
+    client_credentials_manager = SpotifyClientCredentials(client_id= '**', client_secret='**')
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
