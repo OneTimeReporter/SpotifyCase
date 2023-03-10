@@ -165,9 +165,76 @@ if navigatie == "Data Verkenning":
     ''')
     # Hier kan dus gewoon de header van de dataframe die we hebben van Spotify API zoals we in Discord hebben besproken. 
     #zet voor nu gewoon een dummy
-
     
+    code =  '''
+    client_credentials_manager = SpotifyClientCredentials(client_id= 'b064af7b89834329b471d4bbdf8e0cc3', client_secret='a336186c0ae94f319b53dd2fa42c95fc')
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+
+    df_artists = pd.read_csv('artiestenlijst.csv')
+    artists = df_artists['artist']
+
+    data = []
+
+
+    for artist_name in artists:
+        # search for the artist by name
+        results = sp.search(q=artist_name, type='artist')
+
+
+        if len(results['artists']['items']) > 0:
+            artist = results['artists']['items'][0]
+            artist_id = artist['id']
+            top_tracks = sp.artist_top_tracks(artist_id)['tracks']
+            track_ids = [track['id'] for track in top_tracks]
+            audio_features = sp.audio_features(track_ids)
+
+            # retrieve album release dates for each top track
+            album_ids = set([track['album']['id'] for track in top_tracks])
+            album_release_dates = {}
+            for album_id in album_ids:
+                album = sp.album(album_id)
+                album_release_dates[album_id] = album['release_date']
+
+            # iterate through each top track and add the artist and track information to the data list
+            for i, track in enumerate(top_tracks):
+                album_id = track['album']['id']
+                release_date = album_release_dates[album_id]
+
+                data.append({
+                    'artist_id': artist_id,
+                    'artist_name': artist_name,
+                    'artist_popularity': artist['popularity'],
+                    'artist_followers': artist['followers']['total'],
+                    'artist_genres': ",".join(artist['genres']),
+                    'track_name': track['name'],
+                    'track_duration': track['duration_ms'],
+                    'track_popularity': track['popularity'],
+                    'collaborations': ",".join([artist['name'] for artist in track['artists'] if artist['name'] != artist_name]),
+                    'danceability': audio_features[i]['danceability'],
+                    'energy': audio_features[i]['energy'],
+                    'key': audio_features[i]['key'],
+                    'loudness': audio_features[i]['loudness'],
+                    'mode': audio_features[i]['mode'],
+                    'speechiness': audio_features[i]['speechiness'],
+                    'acousticness': audio_features[i]['acousticness'],
+                    'instrumentalness': audio_features[i]['instrumentalness'],
+                    'liveness': audio_features[i]['liveness'],
+                    'valence': audio_features[i]['valence'],
+                    'tempo': audio_features[i]['tempo'],
+                    'release_date': release_date,
+                })
+        else:
+            print(f"No results found for {artist_name}")
+
+
+    df = pd.DataFrame(data)
+
+
+    df.to_csv('output3.csv', index=False)
+    '''
+    st.code(code, language='python')
+                        
     #End van de Spotify Uitleg als het goed is
     
 #     st.dataframe(df_responses)
@@ -490,10 +557,12 @@ Euclidean distance is een van de meest gebruikte machine learning algoritms en i
      ''')
 
     code = ''' st.title("Recommendations")
-    st.write('''Het gebruik van deze functie gaat als volgt:     
+    st.write(```
+    Het gebruik van deze functie gaat als volgt:     
     Door een track van de dataset in te vullen wordt er een prediction gemaakt voor welke nummers vergelijkbaar zijn met dit nummer.     
     Hou er rekening mee dat deze applicatie hoofdlettergevoelig is en dat de titel compleet moet zijn voor een goede voorspelling.   
-    ''')
+    ```)
+    
     # Load the smaller Spotify dataset
     df_spotify = pd.read_csv('smaller_dataset.csv')
 
